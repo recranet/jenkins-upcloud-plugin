@@ -1,0 +1,15 @@
+<div>
+  When an agent that is not running a build is removed and its server deleted.
+  <dl>
+    <dt>After it has been idle for a while</dt>
+    <dd>The agent is removed once it has not run a build for the given number of minutes.</dd>
+    <dt>Just before the billing hour of its server ends</dt>
+    <dd>
+      UpCloud bills a server for every hour it starts, so a server that is deleted early costs the same as one that
+      is kept for the rest of the hour. With this policy an agent stays available for further builds during the
+      time that is paid for anyway, and is removed in the last 5 minutes of an hour if it is idle then. Hours are
+      counted from the moment the server was created. An agent that is building at the end of an hour stays for
+      another one.
+    </dd>
+  </dl>
+</div>

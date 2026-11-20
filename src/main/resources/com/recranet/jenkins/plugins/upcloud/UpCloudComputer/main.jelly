@@ -1,0 +1,44 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core">
+  <j:set var="agent" value="${it.node}"/>
+  <j:if test="${agent != null}">
+    <h2>${%UpCloud server}</h2>
+    <table class="jenkins-table jenkins-table--small jenkins-table--auto-width">
+      <tr>
+        <th>${%Server}</th>
+        <td>
+          <j:choose>
+            <j:when test="${agent.serverUuid != null}">${agent.serverUuid}</j:when>
+            <j:otherwise>${%Not created yet}</j:otherwise>
+          </j:choose>
+        </td>
+      </tr>
+      <j:if test="${agent.serverCreated != null}">
+        <tr>
+          <th>${%Created}</th>
+          <td>${agent.serverCreated}</td>
+        </tr>
+      </j:if>
+      <tr>
+        <th>${%Cloud}</th>
+        <td>${agent.cloudName}</td>
+      </tr>
+      <tr>
+        <th>${%Template}</th>
+        <td>${agent.template.name}</td>
+      </tr>
+      <tr>
+        <th>${%Zone}</th>
+        <td>${agent.template.zone}</td>
+      </tr>
+      <tr>
+        <th>${%Plan}</th>
+        <td>${agent.template.plan}</td>
+      </tr>
+      <tr>
+        <th>${%Image}</th>
+        <td>${agent.template.image}</td>
+      </tr>
+    </table>
+  </j:if>
+</j:jelly>

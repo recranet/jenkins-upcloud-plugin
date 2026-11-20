@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    Provisions UpCloud Cloud Servers as Jenkins build agents on demand and removes them when they are idle.
+</div>

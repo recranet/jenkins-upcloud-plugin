@@ -1,0 +1,54 @@
+jenkins:
+  clouds:
+    - upcloud:
+        name: "upcloud"
+        credentialsId: "upcloud-api"
+        instanceCap: 10
+        noDelayProvisioning: false
+        templates:
+          - name: "linux"
+            labelString: "linux docker"
+            mode: EXCLUSIVE
+            numExecutors: 2
+            zone: "fi-hel1"
+            plan: "2xCPU-4GB"
+            image: "01000000-0000-4000-8000-000030240200"
+            storageSizeGb: 100
+            storageTier: "standard"
+            userData: |
+              #!/bin/sh
+              apt-get update
+              apt-get install -y default-jre-headless
+            publicIpv4: false
+            publicIpv6: true
+            utilityNetwork: false
+            privateNetwork: "03aa7245-0000-4000-8000-000000000002"
+            connectionNetwork: PRIVATE
+            sshCredentialsId: "agent-ssh"
+            sshPort: 2222
+            remoteFs: "/var/jenkins"
+            javaPath: "/opt/java/bin/java"
+            jvmOptions: "-Xmx512m"
+            startupTimeoutSeconds: 300
+            shutdownPolicy:
+              idle:
+                idleMinutes: 30
+            instanceCap: 5
+            nodeProperties:
+              - envVars:
+                  env:
+                    - key: "CLOUD"
+                      value: "upcloud"
+          - name: "minimal"
+            labelString: "minimal"
+            zone: "nl-ams1"
+            plan: "1xCPU-1GB"
+            image: "01000000-0000-4000-8000-000030240200"
+            sshCredentialsId: "agent-ssh"
+          - name: "hourly"
+            labelString: "hourly"
+            zone: "nl-ams1"
+            plan: "1xCPU-1GB"
+            image: "01000000-0000-4000-8000-000030240200"
+            sshCredentialsId: "agent-ssh"
+            shutdownPolicy: "billingHour"

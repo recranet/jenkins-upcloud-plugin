@@ -1,0 +1,12 @@
+<div>
+  A shell script, or the URL of one, that UpCloud runs as root when the server boots for the first time. Typically
+  used to install Java and the tools the builds need.
+  <p>
+    On images that use cloud-init, as most current public templates do, the agent is started once the
+    script has finished. On other images the agent is started as soon as Java is available, so install Java last.
+  </p>
+  <p>
+    The script's output is written to <code>/var/log/cloud-init-output.log</code> on cloud-init images and to
+    <code>/var/log/upcloud_userdata.log</code> on others.
+  </p>
+</div>

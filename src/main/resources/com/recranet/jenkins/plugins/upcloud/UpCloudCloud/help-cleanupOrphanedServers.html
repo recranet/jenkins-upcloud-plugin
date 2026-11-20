@@ -1,0 +1,13 @@
+<div>
+  Periodically deletes servers that this Jenkins controller created but that no longer belong to one of its
+  agents, for example because deleting a server failed when its agent was removed.
+  <p>
+    Every server created by this plugin carries the label <code>jenkins-instance</code> with the ID of the
+    controller that created it. Only servers with the ID of this controller are deleted, and only when they are
+    more than 10 minutes old.
+  </p>
+  <p>
+    Disable this when several controllers share one Jenkins home directory or were cloned from one another, as they
+    then share the same ID and would delete each other's servers.
+  </p>
+</div>

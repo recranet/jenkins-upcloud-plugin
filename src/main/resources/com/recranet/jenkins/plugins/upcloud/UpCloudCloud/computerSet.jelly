@@ -1,0 +1,27 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:dd="/lib/layout/dropdowns"
+         xmlns:f="/lib/form">
+  <j:if test="${it.hasPermission(it.PROVISION) and !it.templates.isEmpty()}">
+    <j:set var="formId" value="${h.generateId()}"/>
+    <tr>
+      <td/>
+      <td colspan="${monitors.size()+2}">
+        <l:overflowButton icon="symbol-cloud" text="${%Provision via} ${it.displayName}" tooltip="${null}"
+                          clazz="jenkins-!-margin-top-2">
+          <j:forEach var="template" items="${it.templates}">
+            <dd:custom>
+              <button class="jenkins-dropdown__item" data-type="upcloud-provision" data-form="${formId}"
+                      data-template="${template.name}">
+                ${template.name}
+              </button>
+            </dd:custom>
+          </j:forEach>
+        </l:overflowButton>
+        <f:form action="${rootURL}/${it.url}provision" method="post" name="provision" id="${formId}">
+          <input name="template" type="hidden"/>
+        </f:form>
+        <st:adjunct includes="com.recranet.jenkins.plugins.upcloud.UpCloudCloud.provision"/>
+      </td>
+    </tr>
+  </j:if>
+</j:jelly>
